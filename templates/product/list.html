@@ -1,0 +1,31 @@
+{% extends "product/../base.html" %}
+{% block content %}
+    <h2>Lista de Productos</h2>
+    <a class="btn btn-primary" href="{% url 'create-products-view' %}">Agregar producto</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Imagen</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <th scope="row">{{ product.id }}</th>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }}</td>
+                <td><img src="http://127.0.0.1:8000/{{product.thumbnail}}"></td>
+                <td><a class="btn btn-danger" href="{% url 'delete-products-view' product_id=product.id %}">Eliminar</a></td>
+                <td><a class="btn btn-info" href="{% url 'update-products-view' product_id=product.id %}">Actualizar</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

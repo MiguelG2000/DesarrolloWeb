@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagina inicial</title>
+</head>
+<body>
+<h1>Hola {{ name }} desde django templates tienes {{ age }} años </h1>
+{{ request.user }}
+{% if request.user.is_authenticated %}
+    {% include "product/base.html" %}
+    {% else %}
+    Muestra el formulario
+{% endif %}
+{{ request.user.is_authenticated }}
+{% for lista in listas %}
+    {{ lista }} <br>
+{% endfor %}
+</body>
+</html>
