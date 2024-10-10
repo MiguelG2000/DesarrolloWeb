@@ -1,3 +1,4 @@
+
 import os
 from logging import raiseExceptions
 
@@ -12,21 +13,21 @@ class Product(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
-        related_name='users_product',
+        related_name="users_product",
         blank=True,
-        null=True
+        null=True,
     )
     name = models.CharField(max_length=100, blank=True, null=True)
-    description = models.TextField(max_length=100,blank=True, null=True)
+    description = models.CharField(max_length=100, blank=True, null=True)
     price = models.DecimalField(max_digits=8, decimal_places=4, default=0.00)
     is_active = models.BooleanField(default=1)
     image = models.ImageField(
-        upload_to='images_product/',
+        upload_to="images_product/",
         blank=True,
         null=True
     )
     thumbnail = models.ImageField(
-        upload_to='thumbs/',
+        upload_to="thumbs",
         blank=True,
         null=True,
         editable=False
@@ -40,6 +41,7 @@ class Product(models.Model):
             raise Exception("No se pudo crear la miniatura")
 
         super(Product, self).save(*args, **kwargs)
+
 
     def make_thumbnail(self):
         image = Image.open(self.image)
