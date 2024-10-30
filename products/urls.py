@@ -16,5 +16,5 @@ urlpatterns = [
     path('delete/<int:product_id>/', product_delete_view, name="delete-product-view"),
     path('list-view/', ProductListView.as_view(), name="list-view"),
     path('product-view/', ProductView.as_view(), name="product-view"),
-    path('api/v1/', include(router.urls), name="api-router")
+    path('api/v1/', include(router.urls), name="api-router"),
 ]
