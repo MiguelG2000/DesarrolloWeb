@@ -52,6 +52,9 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django_extensions',
 
+    'users',
+
+
 ]
 
 MIDDLEWARE = [
@@ -106,7 +109,6 @@ DATABASES = {
         "PORT": "3306"
     }
 }'''
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -194,6 +196,13 @@ SIMPLE_JWT = {
     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
     "TOKEN_TYPE_CLAIM": "token_type",
     "AUTH_HEADER_TYPES": ("Bearer",),
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'users_cache',
+    }
 }
 
 # Static files (CSS, JavaScript, Images)

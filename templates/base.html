@@ -51,7 +51,7 @@
     <link href="https://getbootstrap.com/docs/4.6/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
   </head>
   <body class="d-flex flex-column h-100">
-{% if request.user.is_authenticated %}
+
 <header>
   <!-- Fixed navbar -->
 {% include "nav_bar.html" %}
@@ -63,6 +63,19 @@
       {% block content %}
           <h1>Hola {{ request.user.first_name}} bienvenido al curso de Desarrollo Web Avanzado</h1>
       {% endblock %}
+  {% block side %}
+    <div class="col-sm-2 bg-dark text-white my-5 text-center rounded p-4">
+        <h4 class="my-5">User Profile</h4>
+        <h5 class="font-weight-bold mb-4">Name: {{ request.user.first_name}}</h5>
+        {% for group in groups %}
+            <p class="mb-2">Group: {{group.name}}</p>
+        {% endfor %}
+
+        <button type="button" class="btn btn-danger mt-3">
+            Login Times <span class="badge badge-light"> {{ ct }} </span>
+        </button>
+    </div>
+{% endblock side %}
   </div>
 </main>
 
@@ -71,9 +84,6 @@
     <span class="text-muted">Place sticky footer content here.</span>
   </div>
 </footer>
-{% else %}
-{% include "login.html" %}
-{% endif %}
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
       <script>window.jQuery || document.write('<script src="/docs/4.6/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
