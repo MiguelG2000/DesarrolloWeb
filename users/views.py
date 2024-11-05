@@ -1,7 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import render, HttpResponseRedirect
 from .models import Post
+from django.shortcuts import render
 from django.core.cache import cache
+from django.contrib.auth.views import LoginView
 
 
 # Create your views here.
@@ -35,19 +36,22 @@ def list_build(request):
         "product/list.html"
     )
 
+def login(request):
+    if not request.user.is_authenticated:
+        return LoginView.as_view(template_name="base.html")(request)
 
-def dashboard(request):
-    print("hola")
-    if request.user.is_authenticated:
-        posts = Post.objects.all()
-        user = request.user
-        full_name = user.get_full_name()
-        groups = user.groups.all()
+    # Si está autenticado, recuperar la información para el dashboard
+    posts = Post.objects.all()
+    user = request.user
+    full_name = user.get_full_name()
+    groups = user.groups.all()
 
-        # Retrieve count from cache
-        ct = cache.get('count', version=user.pk)
-        context = {'posts': posts, 'full_name': full_name, 'groups': groups, 'ct': ct}
-        print(ct)
-        return render(request, 'base.html', context)
-    else:
-        return HttpResponseRedirect('')
+    ct = cache.get('count', version=user.pk)
+    context = {
+        'posts': posts,
+        'full_name': full_name,
+        'groups': groups,
+        'ct': ct
+    }
+
+    return render(request, 'base.html', context)

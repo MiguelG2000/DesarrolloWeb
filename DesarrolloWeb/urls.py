@@ -14,6 +14,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from tempfile import template
+
 from django.urls import path, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -31,7 +33,7 @@ from users.views import (
     first_view,
     second_view,
     base_view,
-    list_build, dashboard,
+    list_build, login,
 )
 
 schema_view = get_schema_view(
@@ -48,7 +50,8 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('', dashboard, name='dashboard'),
+    path('', login, name='login'),
+    #path('login/',LoginView.as_view(template_name=""), name='login'),
     path('admin/', admin.site.urls),
     path('users/', first_view, name="first-view"),
     path('users2/', second_view, name="second-view"),
