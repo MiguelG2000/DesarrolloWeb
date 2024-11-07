@@ -45,15 +45,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products',
+    'users',
+    'accounts',
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
     'authapp',
     'drf_yasg',
     'django_extensions',
-
-    'users',
-
+    'django_otp',
+    'django_otp.plugins.otp_totp',
 
 ]
 
@@ -66,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_otp.middleware.OTPMiddleware',
 ]
 
 ROOT_URLCONF = 'DesarrolloWeb.urls'
@@ -227,3 +229,4 @@ LOGOUT_URL = reverse_lazy('login')
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
 CORS_ALLOW_ALL_ORIGINS = True
+

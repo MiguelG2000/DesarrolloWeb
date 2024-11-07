@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Configurar MFA</h2>
+    <p>Escanea el código QR con tu aplicación de autenticación:</p>
+    <img src="{{ qr_url }}" alt="QR Code">
+    <p>O ingresa esta clave manualmente: {{ device.key }}</p>
+    <a href="{% url 'verify_token' %}" class="btn btn-primary">Continuar</a>
+</div>
+{% endblock %}

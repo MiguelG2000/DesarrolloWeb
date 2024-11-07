@@ -7,11 +7,13 @@ from django.contrib.auth.models import User
 from PIL import Image
 from io import BytesIO
 from django.core.files.base import ContentFile
+from django_otp.plugins.otp_email.conf import settings
+
 
 # Create your models here.
 class Product(models.Model):
     user = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
         related_name="users_product",
         blank=True,

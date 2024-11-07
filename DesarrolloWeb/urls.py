@@ -33,8 +33,11 @@ from users.views import (
     first_view,
     second_view,
     base_view,
-    list_build, login,
+    list_build,
+    login,
 )
+
+from accounts.views import (otp_login)
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -50,12 +53,15 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('', login, name='login'),
+    #path('login/', login, name='login'),
+    path('', otp_login, name="otplogin"),
+    path('base/', base_view, name="base"),
     #path('login/',LoginView.as_view(template_name=""), name='login'),
     path('admin/', admin.site.urls),
-    path('users/', first_view, name="first-view"),
+    #path('accounts/', first_view, name="first-view"),
     path('users2/', second_view, name="second-view"),
     path('products/', include("products.urls")),
+    path('accounts/', include("accounts.urls")),
     #path('', LoginView.as_view(template_name="base.html"), name="login"),
     path('logout/', LogoutView.as_view(), name="logout"),
     path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),

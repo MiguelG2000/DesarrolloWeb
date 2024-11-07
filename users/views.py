@@ -1,9 +1,8 @@
 from django.http import HttpResponse
 from .models import Post
-from django.shortcuts import render
 from django.core.cache import cache
 from django.contrib.auth.views import LoginView
-
+from django.shortcuts import render
 
 # Create your views here.
 def first_view(request):
@@ -55,3 +54,5 @@ def login(request):
     }
 
     return render(request, 'base.html', context)
+
+
